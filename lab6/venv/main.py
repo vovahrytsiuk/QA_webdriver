@@ -15,17 +15,26 @@ class GitTest(unittest.TestCase):
         assert "Git" in self.driver.page_source
 
     def test_02(self):
+        #to find input field and print selenium python
         search = self.driver.find_element_by_name('q')
         search.send_keys("selenium python")
         search.send_keys(Keys.RETURN)
+
+        #get tags from result of search and compare with python, webdriver, selenium
         tag = self.driver.find_elements_by_class_name("topic-tag")
         tag = [i.text for i in tag]
         assert 'python' in tag and 'webdriver' in tag and 'selenium' in tag
         star = self.driver.find_element_by_css_selector(".starring-container > a").click()
+
+        #singin git
         title = self.driver.find_element_by_css_selector('h1')
         assert title.text == 'Sign in to GitHub'
+
+        #find username field and fill it
         username = self.driver.find_element_by_name('login')
         username.send_keys('new_login')
+
+        #find password field and fill it
         password = self.driver.find_element_by_name('password')
         password.send_keys('qwerty123')
         password.send_keys(Keys.RETURN)
